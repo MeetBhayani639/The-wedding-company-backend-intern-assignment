@@ -1,0 +1,12 @@
+
+### diagram.mmd
+```mermaid
+graph TD
+    A[Client] --> B[FastAPI]
+    B --> C[/org/create] --> D[Create org_<name> collection]
+    B --> E[/admin/login] --> F[Return JWT]
+    B --> G[/org/update & delete] --> H{JWT Valid?}
+    H -->|Yes| I[Master DB + Dynamic Collection]
+    H -->|No| J[401 Unauthorized]
+    D --> K[Master DB: organizations collection]
+    I --> K
